@@ -1,3 +1,7 @@
+const fs = require("fs")
+const dictArray = fs.readFileSync("./data/dictionary.txt", "utf-8").split('\n')
+const dictLength = dictArray.length
+
 function to2Darr(charArrayInput){
     //must ensure that charArray has exactly 16 elements
     var charArray = charArrayInput.split(", ")
@@ -53,4 +57,18 @@ function findMatch(arr, word, i, j, level){
     }
     else 
         return false
+}
+
+function binarySearchForWord(word, lower, upper){
+    //binary search to search for word
+    if (lower > upper)
+        return false
+    const mid = Math.floor((upper + lower) / 2)
+    const check = dictArray[mid]
+    if (check == word)
+        return true
+    else if (check > word)
+        return binarySearchForWord(word, lower, mid - 1)
+    else
+        return binarySearchForWord(word, mid + 1, upper)
 }
