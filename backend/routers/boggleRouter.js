@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const randomBoard = require('../utils/randomBoard')
+const randomToken = require('../utils/randomToken')
 
 router.post('/games', async (req, res) => {
     const body = req.body
@@ -13,7 +14,7 @@ router.post('/games', async (req, res) => {
         else {
             const game = {
                 id: 1,
-                token: "ditconmemay",
+                token: randomToken(1),
                 duration: body.duration,
                 board: randomBoard()
             }
@@ -21,6 +22,7 @@ router.post('/games', async (req, res) => {
         }
     }
     catch (e){
+        console.log(e)
         res.status(500).send(e)
     }
 })
