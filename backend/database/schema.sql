@@ -10,6 +10,6 @@ CREATE TABLE game
     duration INT unsigned NOT NULL,
     points INT unsigned NOT NULL,
     time_left INT unsigned NOT NULL,
-    created_at INT unsigned NOT NULL,
+    created_at BIGINT unsigned NOT NULL,
     PRIMARY KEY (id)
 );

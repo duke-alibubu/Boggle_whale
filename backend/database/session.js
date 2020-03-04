@@ -18,9 +18,10 @@ const Session = class {
     }
 
     async createGame(token, board, duration){
+        const currentTime = Date.now()
         await this.executeSQL(
-            `INSERT INTO game(token, board, duration, points, time_left)
-            VALUES ("${token}", "${board}", ${duration}, 0, ${duration})`
+            `INSERT INTO game(token, board, duration, points, time_left, created_at)
+            VALUES ("${token}", "${board}", ${duration}, 0, ${duration}, ${currentTime})`
         )
     }
     async getGameById(id){
