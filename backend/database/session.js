@@ -61,6 +61,23 @@ const Session = class {
         }
         else return undefined
     }
+    async updateTimeForGame(id){
+        await this.executeSQL(
+            `UPDATE game
+            SET time_left = time_left + created_at - ${Date.now()} 
+            WHERE id = ${id}`
+        )
+    }
+
+    async getTimeLeftForGame(id){
+        const out = await this.executeSQL(
+            `SELECT time_left FROM game WHERE id = ${id}`
+        )
+        if (out.length >= 1){
+            return out[0][0]
+        }
+        else return undefined
+    }
 }
 
 const dbSession = new Session()
