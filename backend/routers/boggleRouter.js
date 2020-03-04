@@ -26,6 +26,15 @@ router.post('/games', async (req, res) => {
             }
             else {
                 //load the default board
+                const board = algoSolver.loadDefaultBoard()
+                const prevHighest = await dbSession.getHighestGameID()
+                await dbSession.createGame(randomToken(prevHighest + 1), board, body.duration)
+
+                const gameCreated = await dbSession.getGameById(prevHighest + 1)
+                if (!gameCreated)
+                    throw new Error("No game was created!")
+            
+                res.status(201).send(gameCreated)
             }
         }
         else {

@@ -83,6 +83,9 @@ const AlgorithmSolver = class {
         })
         return true
     }
+    loadDefaultBoard(){
+        return fs.readFileSync("./static/test_board.txt", "utf-8")
+    }
 }
 
 const algoSolver = new AlgorithmSolver()
