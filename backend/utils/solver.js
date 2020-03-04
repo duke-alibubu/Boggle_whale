@@ -74,14 +74,15 @@ const AlgorithmSolver = class {
             return binarySearchForWord(word, mid + 1, upper)
     }
     validateBoardString(board){
+        let res = true
         const charArray = board.split(", ")
         if (charArray.length != 16)
             return false
         charArray.forEach(character => {
             if (!"ABCDEFGHIJKLMNOPQRSTUVWXYZ*".includes(character))
-                return false
+                res =  false
         })
-        return true
+        return res
     }
     loadDefaultBoard(){
         return fs.readFileSync("./static/test_board.txt", "utf-8")
