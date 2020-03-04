@@ -1,7 +1,7 @@
 const jwt= require('jsonwebtoken')
 
-const randomToken = (id) => {
-    return jwt.sign({ _id: id.toString()}, process.env.JWT_SECRET)
+const randomToken = (thisId) => {
+    return jwt.sign({ id: thisId}, process.env.JWT_SECRET)
 }
 
 module.exports = randomToken

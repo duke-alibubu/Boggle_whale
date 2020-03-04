@@ -23,6 +23,27 @@ const Session = class {
             VALUES ("${token}", "${board}", ${duration}, 0, ${duration})`
         )
     }
+    async getGameById(id){
+        const out = await this.executeSQL(
+            `SELECT * FROM game WHERE id = ${id}`
+        )
+        if (out.length >= 1){
+            return {
+                id: out[0][0],
+                token: out[0][1],
+                duration: out[0][3],
+                board: out[0][2]
+            }
+        }
+        else return undefined
+    }
+
+    async getHighestGameID(){
+        const out = await this.executeSQL("SELECT max(id) FROM game")
+        if (out.length >= 1)
+            return out[0][0]
+        else return 0
+    }
 }
 
 const dbSession = new Session()

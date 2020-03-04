@@ -13,14 +13,15 @@ router.post('/games', async (req, res) => {
 
         }
         else {
-            const game = {
-                id: 1,
-                token: randomToken(1),
-                duration: body.duration,
-                board: randomBoard()
-            }
-            await dbSession.createGame(randomToken(1), randomBoard(), body.duration)
-            res.status(201).send(game)
+            const board = randomBoard()
+            const prevHighest = await dbSession.getHighestGameID()
+            await dbSession.createGame(randomToken(prevHighest + 1), board, body.duration)
+
+            const gameCreated = await dbSession.getGameById(prevHighest + 1)
+            if (!gameCreated)
+                throw new Error("No game was created!")
+            
+            res.status(201).send(gameCreated)
         }
     }
     catch (e){
