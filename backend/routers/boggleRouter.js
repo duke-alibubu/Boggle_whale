@@ -90,10 +90,14 @@ router.put('/games/:id', auth, async (req, res) => {
 
 router.get('/games/:id', async (req, res) => {
     try {
-
+        const game = await dbSession.showTheGame(req.params.id)
+        if (!game)
+            throw new Error("Game Not Found!")
+        res.status(200).send(game)
     }
     catch (e){
-        
+        console.log(e)
+        res.status(500).send(e.message)
     }
 })
 
