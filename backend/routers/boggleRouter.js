@@ -4,6 +4,7 @@ const randomBoard = require('../utils/randomBoard')
 const randomToken = require('../utils/randomToken')
 const {dbSession} = require('../database/session')
 const algoSolver = require('../utils/solver')
+const auth = require('../middleware/auth')
 
 router.post('/games', async (req, res) => {
     const body = req.body
@@ -55,12 +56,30 @@ router.post('/games', async (req, res) => {
     }
 })
 
-router.put('/games/:id', async (req, res) => {
+router.put('/games/:id', auth, async (req, res) => {
     try {
-
+        const body = req.body
+        const game = req.game
+        if (!body.word)
+            return res.status(400).send("No Word!")
+        const pointAwarded = algoSolver.getPointForWord(body.word, game.board)
+        if (pointAwarded != 0){
+            await dbSession.increasePointForGame(game.id, pointAwarded)
+        }
+        const gamePoint = await dbSession.getPointForGame(game.id)
+        if (gamePoint == undefined)
+            throw new Error("Cannot get game point!")
+        res.status(200).send({
+            id: game.id,
+            token: body.token,
+            duration: game.duration,
+            board: game.board,
+            points: gamePoint
+        })
     }
     catch (e){
-        
+        console.log(e)
+        res.status(500).send(e.message)
     }
 })
 

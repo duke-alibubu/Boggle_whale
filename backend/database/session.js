@@ -44,6 +44,22 @@ const Session = class {
             return out[0][0]
         else return 0
     }
+    async increasePointForGame(id, point){
+        await this.executeSQL(
+            `UPDATE game
+            SET points = points + ${point}
+            WHERE id = ${id}`
+        )
+    }
+    async getPointForGame(id){
+        const out = await this.executeSQL(
+            `SELECT points FROM game WHERE id = ${id}`
+        )
+        if (out.length >= 1){
+            return out[0][0]
+        }
+        else return undefined
+    }
 }
 
 const dbSession = new Session()

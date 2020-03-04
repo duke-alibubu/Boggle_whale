@@ -7,9 +7,9 @@ const AlgorithmSolver = class {
         //must ensure that charArray has exactly 16 elements
         var charArray = charArrayInput.split(", ")
         var arr = []
-        for (i = 0; i < 4; i++){
+        for (let i = 0; i < 4; i++){
             var arr_element = []
-            for (j = 0; j < 4; j++){
+            for (let j = 0; j < 4; j++){
                 arr_element.push(charArray[4*i + j])
             }
             arr.push(arr_element)
@@ -20,11 +20,11 @@ const AlgorithmSolver = class {
     checkWordinBoard(word, board){
         if (word.length > 16)
             return false
-        const arr = to2Darr(board)
-        for (i = 0; i < 4; i++){
-            for (j = 0; j < 4; j++)
+        const arr = this.to2Darr(board)
+        for (let i = 0; i < 4; i++){
+            for (let j = 0; j < 4; j++)
                 if (arr[i][j] == word[0] || arr[i][j] == "*"){
-                    if (findMatch(arr, word, i, j, 0))
+                    if (this.findMatch(arr, word, i, j, 0))
                         return true
                 }
         }
@@ -39,18 +39,18 @@ const AlgorithmSolver = class {
         
         if (arr[i][j] == word[level] || arr[i][j] == "*"){
             //mark this cell as visited
-            temp = arr[i][j]
+            let temp = arr[i][j]
             arr[i][j] = "#"
     
             //find next pattern in 8 directions
-            res = findMatch(arr, word, i - 1, j, level + 1) ||
-                findMatch(arr, word, i + 1, j, level + 1) ||
-                findMatch(arr, word, i, j - 1, level + 1) ||
-                findMatch(arr, word, i, j + 1, level + 1) ||
-                findMatch(arr, word, i - 1, j + 1, level + 1) ||
-                findMatch(arr, word, i + 1, j + 1, level + 1) ||
-                findMatch(arr, word, i + 1, j - 1, level + 1) ||
-                findMatch(arr, word, i - 1, j - 1, level + 1)
+            let res = this.findMatch(arr, word, i - 1, j, level + 1) ||
+                this.findMatch(arr, word, i + 1, j, level + 1) ||
+                this.findMatch(arr, word, i, j - 1, level + 1) ||
+                this.findMatch(arr, word, i, j + 1, level + 1) ||
+                this.findMatch(arr, word, i - 1, j + 1, level + 1) ||
+                this.findMatch(arr, word, i + 1, j + 1, level + 1) ||
+                this.findMatch(arr, word, i + 1, j - 1, level + 1) ||
+                this.findMatch(arr, word, i - 1, j - 1, level + 1)
             
             //upon finishing return this cell
             arr[i][j] = temp
@@ -86,6 +86,22 @@ const AlgorithmSolver = class {
     }
     loadDefaultBoard(){
         return fs.readFileSync("./static/test_board.txt", "utf-8")
+    }
+    getPointForWord(word, board){
+        if (!this.checkWordinBoard(word, board) || word.length <= 2)
+            return 0
+        else {
+            if (word.length == 3 || word.length == 4)
+                return 1
+            else if (word.length == 5)
+                return 2
+            else if (word.length == 6)
+                return 3
+            else if (word.length == 7)
+                return 5
+            else 
+                return 11
+        }
     }
 }
 
