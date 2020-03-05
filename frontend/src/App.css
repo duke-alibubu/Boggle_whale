@@ -21,22 +21,14 @@
   color: #09d3ac;
 }
 
-#profile_img {
-  height: 20%;
-  width: 20%;
-  margin: 5%;
-}
+.game-board{ 
+  display: grid;
+  grid-template-columns: 120px 120px 120px 120px;
+  grid-template-rows: 120px 120px 120px 120px 20px;
+  justify-content: center;
+ }
 
-#content {
-  background-image: linear-gradient(to bottom right,#667eea, #764ba2);
-}
-
-
-#my_name {
-  color: black;
-  position: absolute;
-  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif, Helvetica;
-  font-size: 300%;
-  left: 30%;
-  top: 30%;
-}
+ .game-box {
+  background-color: #d9d9d9;
+  border: 2px solid black;
+ }
