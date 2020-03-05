@@ -1,0 +1,42 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+#profile_img {
+  height: 20%;
+  width: 20%;
+  margin: 5%;
+}
+
+#content {
+  background-image: linear-gradient(to bottom right,#667eea, #764ba2);
+}
+
+
+#my_name {
+  color: black;
+  position: absolute;
+  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif, Helvetica;
+  font-size: 300%;
+  left: 30%;
+  top: 30%;
+}
