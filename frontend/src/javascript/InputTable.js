@@ -41,7 +41,7 @@ export class InputTable extends React.Component {
             
             this.props.onChange(arr)
             this.setState({
-                requestMessage: ""
+                requestMessage: `The loaded board is: "${content.board}". Game ID: ${content.id} .Game duration: ${content.duration} ms.`
             })
         }
         catch (e) {
@@ -94,7 +94,7 @@ export class InputTable extends React.Component {
                     </tr>
                     <tr>
                         <td>
-                            <span>{this.state.requestMessage}</span>
+                            <p>{this.state.requestMessage}</p>
                         </td>
                     </tr>
                 </table>
