@@ -10,7 +10,18 @@ export class InputTable extends React.Component {
     }
 
     loadInput(){
-        console.log(this.duration.value, this.random)
+        console.log(this.duration.value, this.random, this.board.value)
+        //split board into 2D array
+        var charArray = this.board.value.split(", ")
+        var arr = []
+        for (let i = 0; i < 4; i++){
+            var arr_element = []
+            for (let j = 0; j < 4; j++){
+                arr_element.push(charArray[4*i + j])
+            }
+            arr.push(arr_element)
+        }
+        this.props.onChange(arr)
     }
 
     randomChange(e){
@@ -23,7 +34,7 @@ export class InputTable extends React.Component {
                     <tr>
                         <td>
                             <label htmlFor="game_duration">Duration: </label>
-                            <input type="number" id="game_duration" ref={(dur) => this.duration=dur}  name="game_duration" value="180000" />
+                            <input type="number" id="game_duration" ref={(dur) => this.duration=dur}  name="game_duration"/>
                             <span>ms</span>
                             <br/>
                         </td>
@@ -46,7 +57,7 @@ export class InputTable extends React.Component {
                     <tr>
                         <td>
                             <label htmlFor="board_input">Board: </label>
-                            <textarea id="board_input" name="board_input" value="T, A, P, *, E, A, K, S, O, B, R, S, S, *, X, D" />
+                            <textarea id="board_input" name="board_input" ref={(board) => this.board=board} />
                         </td>
                     </tr>
                     <tr>
