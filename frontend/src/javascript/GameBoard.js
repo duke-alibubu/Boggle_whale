@@ -48,7 +48,6 @@ export class GameBoard extends React.Component {
                     </div>
                 </div>
                 <InputTable onChange={this.userSubmit}/>
-                {/* <WorldBoard className={this.state.game_started ? "hidden" : ""} /> */}
                 <WorldBoard duration ={this.state.duration} id={this.state.id} token={this.state.token}/>
             </div>
         );

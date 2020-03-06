@@ -47,7 +47,9 @@ export class WorldBoard extends React.Component {
     render(){
         return (
             <div id="word_board">
-                <p>{this.state.duration}</p>
+                <div id="timer_box">
+                    {this.state.duration}
+                </div>
                 <p>{this.state.token}</p>
             </div>
         );
