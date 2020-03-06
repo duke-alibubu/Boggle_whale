@@ -3,28 +3,55 @@ import React from 'react';
 export class InputTable extends React.Component {
     constructor(props) {
         super(props)
-    
+
         this.random = true
         this.loadInput = this.loadInput.bind(this)
         this.randomChange = this.randomChange.bind(this)
-    }
-
-    loadInput(){
-        console.log(this.duration.value, this.random, this.board.value)
-        //split board into 2D array
-        var charArray = this.board.value.split(", ")
-        var arr = []
-        for (let i = 0; i < 4; i++){
-            var arr_element = []
-            for (let j = 0; j < 4; j++){
-                arr_element.push(charArray[4*i + j])
-            }
-            arr.push(arr_element)
+        this.state = {
+            requestMessage: ""
         }
-        this.props.onChange(arr)
     }
 
-    randomChange(e){
+    async loadInput() {
+        try {
+            const url = 'http://localhost:8000/games'
+            const rawResponse = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "duration": this.duration.value,
+                    "random": this.random,
+                    "board": this.board.value
+                })
+            });
+            const content = await rawResponse.json();
+            
+            var charArray = content.board.split(", ")
+            var arr = []
+            for (let i = 0; i < 4; i++) {
+                var arr_element = []
+                for (let j = 0; j < 4; j++) {
+                    arr_element.push(charArray[4 * i + j])
+                }
+                arr.push(arr_element)
+            }
+            
+            this.props.onChange(arr)
+            this.setState({
+                requestMessage: ""
+            })
+        }
+        catch (e) {
+            this.setState({
+                requestMessage: "Wrong Input Format!"
+            })
+        }
+    }
+
+    randomChange(e) {
         this.random = !this.random
     }
     render() {
@@ -34,9 +61,9 @@ export class InputTable extends React.Component {
                     <tr>
                         <td>
                             <label htmlFor="game_duration">Duration: </label>
-                            <input type="number" id="game_duration" ref={(dur) => this.duration=dur}  name="game_duration"/>
+                            <input type="number" id="game_duration" ref={(dur) => this.duration = dur} name="game_duration" />
                             <span>ms</span>
-                            <br/>
+                            <br />
                         </td>
                     </tr>
                     <tr>
@@ -57,12 +84,17 @@ export class InputTable extends React.Component {
                     <tr>
                         <td>
                             <label htmlFor="board_input">Board: </label>
-                            <textarea id="board_input" name="board_input" ref={(board) => this.board=board} />
+                            <textarea id="board_input" name="board_input" ref={(board) => this.board = board} />
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <button id="load_input" onClick={this.loadInput}>Load Input</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>{this.state.requestMessage}</span>
                         </td>
                     </tr>
                 </table>
