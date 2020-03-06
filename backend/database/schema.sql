@@ -9,7 +9,7 @@ CREATE TABLE game
     board VARCHAR(150) NOT NULL,
     duration INT unsigned NOT NULL,
     points INT unsigned NOT NULL,
-    time_left INT NOT NULL,
-    created_at BIGINT unsigned NOT NULL,
+    time_left BIGINT NOT NULL,
+    created_at BIGINT NOT NULL,
     PRIMARY KEY (id)
 );
