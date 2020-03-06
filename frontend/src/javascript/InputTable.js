@@ -89,7 +89,7 @@ export class InputTable extends React.Component {
                     </tr>
                     <tr>
                         <td>
-                            <button id="load_input" onClick={this.loadInput}>Load Input</button>
+                            <button id="load_input" onClick={this.loadInput}>Play New Game</button>
                         </td>
                     </tr>
                     <tr>

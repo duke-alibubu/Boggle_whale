@@ -1,18 +1,21 @@
 import React from 'react';
 import {InputTable} from './InputTable'
+import { WorldBoard } from './WordBoard';
 
 export class GameBoard extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            board_array: [[],[],[],[]]
+            board_array: [[],[],[],[]],
+            game_started: false
         }
         this.userSubmit = this.userSubmit.bind(this)
     }
 
     userSubmit(arr){
         this.setState({
-            board_array: arr
+            board_array: arr,
+            game_started: true
         })
     }
     render() {
@@ -39,6 +42,8 @@ export class GameBoard extends React.Component {
                     </div>
                 </div>
                 <InputTable onChange={this.userSubmit}/>
+                {/* <WorldBoard className={this.state.game_started ? "hidden" : ""} /> */}
+                {this.state.game_started && <WorldBoard/>}
             </div>
         );
     }

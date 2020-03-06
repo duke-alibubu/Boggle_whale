@@ -43,3 +43,11 @@
  #input-table {
   display:inline-block;
  }
+
+ .word_board {
+  margin-right: 20px;
+ }
+
+ #hidden {
+  display: none;
+ }
