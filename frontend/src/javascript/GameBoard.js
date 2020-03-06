@@ -12,11 +12,17 @@ export class GameBoard extends React.Component {
         this.userSubmit = this.userSubmit.bind(this)
     }
 
-    userSubmit(arr){
+    userSubmit(arr, duration, id, token){
         this.setState({
             board_array: arr,
-            game_started: true
+            game_started: true,
+            duration: duration,
+            id: id,
+            token: token
         })
+        // console.log(this.state)
+        // this.render()
+        //this.props.gameData = {duration, id, token}
     }
     render() {
         return (
@@ -43,7 +49,7 @@ export class GameBoard extends React.Component {
                 </div>
                 <InputTable onChange={this.userSubmit}/>
                 {/* <WorldBoard className={this.state.game_started ? "hidden" : ""} /> */}
-                {this.state.game_started && <WorldBoard/>}
+                <WorldBoard duration ={this.state.duration} id={this.state.id} token={this.state.token}/>
             </div>
         );
     }

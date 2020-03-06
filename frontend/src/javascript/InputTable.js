@@ -39,10 +39,11 @@ export class InputTable extends React.Component {
                 arr.push(arr_element)
             }
             
-            this.props.onChange(arr)
+            
             this.setState({
                 requestMessage: `The loaded board is: "${content.board}". Game ID: ${content.id} .Game duration: ${content.duration} ms.`
             })
+            this.props.onChange(arr, content.duration, content.id, content.token)
         }
         catch (e) {
             this.setState({
