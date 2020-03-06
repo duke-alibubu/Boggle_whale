@@ -81,11 +81,7 @@ const Session = class {
     async updateTimeForGame(id){
         await this.executeSQL(
             `UPDATE game
-            CASE
-                WHEN duration > ${Date.now()} - created_at
-                    THEN SET time_left = duration + created_at - ${Date.now()} 
-                    ELSE SET time_left = 0
-            END
+            SET time_left = duration + created_at - ${Date.now()} 
             WHERE id = ${id}`
         )
     }

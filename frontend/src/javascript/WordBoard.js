@@ -1,13 +1,17 @@
 import React from 'react';
 
 export class WorldBoard extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             duration: this.props.duration,
             token: this.props.token,
-            id: this.props.id
+            id: this.props.id,
+            word_list: [],
+            points: 0,
+            word_concat: ""
         }
+        this.submitWord = this.submitWord.bind(this)
     }
     componentDidMount() {
         this.myInterval = setInterval(() => {
@@ -22,14 +26,18 @@ export class WorldBoard extends React.Component {
         }, 1)
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
         this.setState({
             duration: nextProps.duration,
             token: nextProps.token,
-            id: nextProps.id
+            id: nextProps.id,
+            word_list: [],
+            points: 0,
+            word_concat: ""
         })
         this.myInterval = setInterval(() => {
             if (this.state.duration > 0) {
+                console.log(this.state.duration)
                 this.setState(({ duration }) => ({
                     duration: duration - 1
                 }))
@@ -44,13 +52,56 @@ export class WorldBoard extends React.Component {
         clearInterval(this.myInterval)
     }
 
-    render(){
+    async submitWord(){
+        //only check if the game duration is > 0 and the word is not present in the word list
+        if (this.state.duration > 0 && !this.state.word_list.includes(this.word.value)){
+            try {
+                const url = 'http://localhost:8000/games/' + this.state.id
+                const rawResponse = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "token": this.state.token,
+                        "word": this.word.value
+                    })
+                });
+                const content = await rawResponse.json();
+                this.setState(({
+                    points: content.points,
+                    word_list: this.state.word_list.concat(this.word.value)
+                }))
+                this.setState({
+                    word_concat: this.state.word_list.join(", ")
+                })
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+    }
+    render() {
         return (
-            <div id="word_board">
-                <div id="timer_box">
-                    {this.state.duration}
+            <div>
+                <div id="play_board">
+                    <div id="timer_box">
+                        {this.state.duration}
+                    </div>
+                    <div>
+                        <br />
+                        <label htmlFor="word_input">Enter a word: </label>
+                        <input type="text" id="game_duration" ref={(word) => this.word = word} name="game_duration" />
+                        <button id="submit_word" onClick={this.submitWord}>Submit</button>
+                    </div>
+                    <div>
+                        <p>Points: {this.state.points}</p>
+                    </div>
                 </div>
-                <p>{this.state.token}</p>
+                <div id="word_board">
+                    Found Word: {this.state.word_concat}
+                </div>
             </div>
         );
     }

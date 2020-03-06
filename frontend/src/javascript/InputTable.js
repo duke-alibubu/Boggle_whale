@@ -70,12 +70,6 @@ export class InputTable extends React.Component {
                     <tr>
                         <td>
                             <span>Random Board? </span>
-                            {/* <div class="radio">
-                                <label><input type="radio" name="randomize" ref={(a) => this.random=true} checked />Yes</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="randomize" ref={(b) => this.random=false} />No</label>
-                            </div> */}
                             <select onChange={this.randomChange} >
                                 <option value="A">Yes</option>
                                 <option value="B">No</option>
