@@ -8,7 +8,8 @@ const auth = require('../middleware/auth')
 
 router.post('/games', async (req, res) => {
     const body = req.body
-    if (body.duration == null || body.random == null)
+    console.log(body)
+    if (body.duration == null || body.random == null || body.duration === '')
         return res.status(400).send("Invalid Request Body Format!")
     try {
         if (body.random == false){
