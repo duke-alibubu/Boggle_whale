@@ -62,6 +62,19 @@ export class WorldBoard extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.myInterval)
+                //send a sample PUT request with empty word to end the game
+                const url = 'http://localhost:8000/games/' + this.state.id
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "token": this.state.token,
+                        "word": "1"
+                    })
+                });
     }
 
     async submitWord(){
