@@ -70,11 +70,11 @@ router.put('/games/:id', auth, async (req, res) => {
             return res.status(400).send("Incorrect Word!")
         }
         const gamePoint = await dbSession.getPointForGame(game.id)
-        if (gamePoint == undefined)
+        if (!gamePoint)
             throw new Error("Cannot get game point!")
         await dbSession.updateTimeForGame(game.id)
         const timeLeft = await dbSession.getTimeLeftForGame(game.id)
-        if (timeLeft == undefined)
+        if (!timeLeft)
             throw new Error("Cannot get time left!")
         res.status(200).send({
             id: game.id,
