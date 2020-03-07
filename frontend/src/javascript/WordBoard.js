@@ -99,8 +99,9 @@ export class WorldBoard extends React.Component {
         return (
             <div>
                 <div id="play_board">
-                    <div id="timer_box">
-                        {this.state.duration}
+                    <div>
+                        <div id = "timer_word">Timer: </div>
+                        <div id="timer_box">{this.state.duration}</div>
                     </div>
                     <div>
                         <br />

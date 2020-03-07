@@ -55,6 +55,12 @@
   padding: 2rem;
   text-align: center;
   max-width: 200px;
+  display:inline-block;
+  
+}
+#timer_word {
+  margin-right:10px;
+  display:inline-block;
 }
 
 #play_board {
@@ -64,4 +70,4 @@
 
 #word_board {
   display:inline-block;
- }
+}
