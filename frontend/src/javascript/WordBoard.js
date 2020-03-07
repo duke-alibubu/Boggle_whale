@@ -82,13 +82,17 @@ export class WorldBoard extends React.Component {
                     })
                 });
                 const content = await rawResponse.json();
-                this.setState(({
-                    points: content.points,
-                    word_list: this.state.word_list.concat(this.word.value)
-                }))
-                this.setState({
-                    word_concat: this.state.word_list.join(", ")
-                })
+                if (content.points > this.state.points){
+                    //update the state only if the user got a correct word that gives a point lareger than 0
+                    this.setState(({
+                        points: content.points,
+                        word_list: this.state.word_list.concat(this.word.value)
+                    }))
+                    this.setState({
+                        word_concat: this.state.word_list.join(", ")
+                    })
+                }
+                
             }
             catch (e) {
                 console.log(e)
