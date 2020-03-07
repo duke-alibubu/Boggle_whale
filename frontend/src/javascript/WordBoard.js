@@ -110,7 +110,7 @@ export class WorldBoard extends React.Component {
                     <div>
                         <br />
                         <label htmlFor="word_input">Enter a word: </label>
-                        <input type="text" id="game_duration" ref={(word) => this.word = word} name="game_duration" />
+                        <input type="text" id="game_duration" ref={(word) => this.word = word} style = {{marginRight: 10}} name="game_duration" />
                         <button id="submit_word" onClick={this.submitWord}>Submit</button>
                     </div>
                     <div>

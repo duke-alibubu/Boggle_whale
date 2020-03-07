@@ -63,7 +63,7 @@ export class InputTable extends React.Component {
                     <tr>
                         <td>
                             <label htmlFor="game_duration">Duration: </label>
-                            <input type="number" id="game_duration" ref={(dur) => this.duration = dur} name="game_duration" />
+                            <input type="number" id="game_duration" ref={(dur) => this.duration = dur} style = {{marginRight: 10}} name="game_duration" />
                             <span>ms</span>
                             <br />
                         </td>
