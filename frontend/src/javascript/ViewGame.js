@@ -1,10 +1,10 @@
 import React from 'react';
 
-export class Intro extends React.Component {
+export class ViewGame extends React.Component {
     render(){
         return (
             <div id="intro">
-                
+                Hello World
             </div>
         );
     }
