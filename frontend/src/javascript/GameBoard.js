@@ -6,8 +6,7 @@ export class GameBoard extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            board_array: [[],[],[],[]],
-            game_started: false
+            board_array: [[],[],[],[]]
         }
         this.userSubmit = this.userSubmit.bind(this)
     }
@@ -15,7 +14,6 @@ export class GameBoard extends React.Component {
     userSubmit(arr, duration, id, token){
         this.setState({
             board_array: arr,
-            game_started: true,
             duration: duration,
             id: id,
             token: token

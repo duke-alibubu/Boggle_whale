@@ -49,6 +49,7 @@ export class InputTable extends React.Component {
             this.setState({
                 requestMessage: "Wrong Input Format!"
             })
+            this.props.onChange([[],[],[],[]], 0, 0, 0, 0)
         }
     }
 
