@@ -37,13 +37,25 @@ export class WorldBoard extends React.Component {
         })
         this.myInterval = setInterval(() => {
             if (this.state.duration > 0) {
-                console.log(this.state.duration)
                 this.setState(({ duration }) => ({
                     duration: duration - 1
                 }))
             }
             else {
                 clearInterval(this.myInterval)
+                //send a sample PUT request with empty word to end the game
+                const url = 'http://localhost:8000/games/' + this.state.id
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "token": this.state.token,
+                        "word": "1"
+                    })
+                });
             }
         }, 1)
     }
@@ -54,6 +66,7 @@ export class WorldBoard extends React.Component {
 
     async submitWord(){
         //only check if the game duration is > 0 and the word is not present in the word list
+        this.word.value = this.word.value.toUpperCase()
         if (this.state.duration > 0 && !this.state.word_list.includes(this.word.value)){
             try {
                 const url = 'http://localhost:8000/games/' + this.state.id
