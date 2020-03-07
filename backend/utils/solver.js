@@ -1,8 +1,14 @@
 const fs = require("fs")
 const dictArray = fs.readFileSync("./static/dictionary.txt", "utf-8").split('\n')
-const dictLength = dictArray.length
 
 const AlgorithmSolver = class {
+    constructor(dictArray){
+        // this.fs = require("fs")
+        // this.dictArray = this.fs.readFileSync("./static/dictionary.txt", "utf-8").split('\n')
+        this.dictArray = dictArray
+        this.dictLength = this.dictArray.length
+    }
+    
     to2Darr(charArrayInput){
         //must ensure that charArray has exactly 16 elements
         var charArray = charArrayInput.split(", ")
@@ -65,13 +71,14 @@ const AlgorithmSolver = class {
         if (lower > upper)
             return false
         const mid = Math.floor((upper + lower) / 2)
-        const check = dictArray[mid]
-        if (check == word)
+        const check = this.dictArray[mid]
+        console.log(check)
+        if (check === word)
             return true
         else if (check > word)
-            return binarySearchForWord(word, lower, mid - 1)
+            return this.binarySearchForWord(word, lower, mid - 1)
         else
-            return binarySearchForWord(word, mid + 1, upper)
+            return this.binarySearchForWord(word, mid + 1, upper)
     }
     validateBoardString(board){
         let res = true
@@ -88,7 +95,7 @@ const AlgorithmSolver = class {
         return fs.readFileSync("./static/test_board.txt", "utf-8")
     }
     getPointForWord(word, board){
-        if (!this.checkWordinBoard(word, board) || word.length <= 2)
+        if (!this.checkWordinBoard(word, board) || !this.binarySearchForWord(word.toLowerCase(), 0, this.dictLength - 1) || word.length <= 2)
             return 0
         else {
             if (word.length == 3 || word.length == 4)
@@ -105,7 +112,7 @@ const AlgorithmSolver = class {
     }
 }
 
-const algoSolver = new AlgorithmSolver()
+const algoSolver = new AlgorithmSolver(dictArray)
 
 module.exports = algoSolver
 
