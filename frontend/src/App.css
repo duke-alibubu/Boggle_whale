@@ -67,7 +67,7 @@
 
 #play_board {
   display:inline-block;
-  margin-right:500px;
+  margin-right: 400px;
  }
 
 #word_board {
@@ -92,4 +92,17 @@
 
 #intro-text {
   display:inline-block;
+}
+
+#game-result-holder {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#player_here {
+  margin-left: 20px;
+}
+
+#menu_bar {
+  text-align: center;
 }

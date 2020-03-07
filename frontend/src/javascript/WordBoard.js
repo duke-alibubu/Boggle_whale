@@ -101,7 +101,7 @@ export class WorldBoard extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div id="player_here">
                 <div id="play_board">
                     <div>
                         <div id = "timer_word">Timer: </div>
