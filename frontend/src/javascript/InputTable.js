@@ -41,7 +41,7 @@ export class InputTable extends React.Component {
             
             
             this.setState({
-                requestMessage: `The loaded board is: "${content.board}". Game ID: ${content.id} .Game duration: ${content.duration} ms.`
+                requestMessage: ""
             })
             this.props.onChange(arr, content.duration, content.id, content.token)
         }

@@ -72,7 +72,6 @@ const AlgorithmSolver = class {
             return false
         const mid = Math.floor((upper + lower) / 2)
         const check = this.dictArray[mid]
-        console.log(check)
         if (check === word)
             return true
         else if (check > word)

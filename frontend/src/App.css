@@ -37,11 +37,13 @@
 
  #board-content {
   display:inline-block;
-  margin-right:10px;
+  margin-right: 50px;
  }
 
  #input-table {
   display:inline-block;
+  position: absolute;
+  margin-top: 20px;
  }
 
 
@@ -69,5 +71,25 @@
  }
 
 #word_board {
+  display:inline-block;
+}
+
+.link_button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#intro-boggle {
+  display:inline-block;
+  margin-right: 100px;
+}
+
+#intro-text {
   display:inline-block;
 }
