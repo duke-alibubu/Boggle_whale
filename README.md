@@ -17,7 +17,7 @@
 - First, cd to the `backend` folder, then install any dependencies required for the backend server by running `npm install`.
 - Then run the command `npm start` to host the backend server!
 ### 3. Start the frontend server
-- First, cd to the `frontend` folder, then install any dependencies required for the backend server by running `npm install`.
+- First, cd to the `frontend` folder, then install any dependencies required for the frontend server by running `npm install`.
 - Then run the command `npm start` to host the frontend server!
 ### 4. Enjoying the game
 - After you have successfully started the app, go to `http://localhost:3000/` to start playing the game! 
