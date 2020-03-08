@@ -23,3 +23,12 @@
 - After you have successfully started the app, go to `http://localhost:3000/` to start playing the game! 
 
 ## Some screenshots of the game
+Some screenshots. Sorry I am not really a frontend developer so the UI does not look so good ...
+- Before the game start: 
+![Alt text](screenshot/beforestart.png?raw=true "before start")
+- Creating the game, which lasts for 3 minutes with a random board:
+![Alt text](screenshot/init.png?raw=true "init")
+- Playing the game:
+![Alt text](screenshot/playing.png?raw=true "playing")
+- Viewing the game history:
+![Alt text](screenshot/viewgame.png?raw=true "viewgame")
