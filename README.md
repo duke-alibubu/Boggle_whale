@@ -5,8 +5,8 @@
 
 ## How to run the app
 ### 0. Before you start ...
-- As you can see in the .gitignore file in the backend folder, I am hiding the `node_modules` folder (cause it's too big !?!) and the `config` folder, which contains a `dev.env` file that stores configuration information for the repository. Before running the app, you will need to create a `dev.env` file and place it inside the `config` folder by yourself:
-- The `config` folder should include the following:
+- As you can see in the `.gitignore` file in the backend folder, I am hiding the `node_modules` folder (cause it's too big !?!) and the `config` folder, which contains a `dev.env` file that stores configuration information for the repository. Before running the app, you will need to create a `dev.env` file and place it inside the `config` folder by yourself:
+- The `config/dev.env` file should include the following:
   + `PORT`: the port used for the backend server. Should not be 3000, since I alr used that port for the frontend.
   + `JWT_SECRET`: I use JSON Web Token to create the authentication token, so this is the secret used to generate the token. Can be anything you like.
   + `MYSQL_USERNAME`: The user to access your MySQL database. if you do not want to create an user, you can just use `root` here.
