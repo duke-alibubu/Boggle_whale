@@ -71,9 +71,10 @@ router.put('/games/:id', auth, async (req, res) => {
             throw new Error("Cannot get game point!")
         await dbSession.updateTimeForGame(game.id)
         const timeLeft = await dbSession.getTimeLeftForGame(game.id)
-        if (!timeLeft)
+        if (timeLeft === undefined)
             throw new Error("Cannot get time left!")
-
+        if (timeLeft == 0)
+            return res.status(400).send("The game is over!")
         //even if there's an incorrect word, still need to update the time for the game!
         if (pointAwarded == 0) {
             return res.status(400).send("Incorrect Word!")
