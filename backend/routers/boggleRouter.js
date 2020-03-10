@@ -9,12 +9,12 @@ const auth = require('../middleware/auth')
 router.post('/games', async (req, res) => {
     const body = req.body
     if (body.duration == null || body.random == null || body.duration === '')
-        return res.status(400).send("Invalid Request Body Format!")
+        return res.status(400).send({message: "Invalid Request Body Format!"})
     try {
         if (body.random == false){
             if (body.board != null && body.board != ""){
                 if (!algoSolver.validateBoardString(body.board)){
-                    return res.status(400).send("Wrong format of board!")
+                    return res.status(400).send({message: "Wrong format of board!"})
                 }
                 const prevHighest = await dbSession.getHighestGameID()
                 await dbSession.createGame(randomToken(prevHighest + 1), body.board, body.duration)
@@ -52,7 +52,7 @@ router.post('/games', async (req, res) => {
     }
     catch (e){
         console.log(e)
-        res.status(500).send(e.message)
+        res.status(500).send({message: e.message})
     }
 })
 
@@ -61,7 +61,7 @@ router.put('/games/:id', auth, async (req, res) => {
         const body = req.body
         const game = req.game
         if (!body.word)
-            return res.status(400).send("No Word!")
+            return res.status(400).send({message: "No Word!"})
         const pointAwarded = algoSolver.getPointForWord(body.word, game.board)
         if (pointAwarded != 0){
             await dbSession.increasePointForGame(game.id, pointAwarded)
@@ -74,10 +74,10 @@ router.put('/games/:id', auth, async (req, res) => {
         if (timeLeft === undefined)
             throw new Error("Cannot get time left!")
         if (timeLeft == 0)
-            return res.status(400).send("The game is over!")
+            return res.status(400).send({message: "The game is over!"})
         //even if there's an incorrect word, still need to update the time for the game!
         if (pointAwarded == 0) {
-            return res.status(400).send("Incorrect Word!")
+            return res.status(400).send({message: "Incorrect Word!"})
         }
         res.status(200).send({
             id: game.id,
@@ -90,7 +90,7 @@ router.put('/games/:id', auth, async (req, res) => {
     }
     catch (e){
         console.log(e)
-        res.status(500).send(e.message)
+        res.status(500).send({message: e.message})
     }
 })
 
@@ -103,7 +103,7 @@ router.get('/games/:id', async (req, res) => {
     }
     catch (e){
         console.log(e)
-        res.status(404).send(e.message)
+        res.status(404).send({message: e.message})
     }
 })
 
