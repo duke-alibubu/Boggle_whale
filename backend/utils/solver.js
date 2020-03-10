@@ -3,8 +3,6 @@ const dictArray = fs.readFileSync("./static/dictionary.txt", "utf-8").split('\n'
 
 const AlgorithmSolver = class {
     constructor(dictArray){
-        // this.fs = require("fs")
-        // this.dictArray = this.fs.readFileSync("./static/dictionary.txt", "utf-8").split('\n')
         this.dictArray = dictArray
         this.dictLength = this.dictArray.length
     }
@@ -91,7 +89,7 @@ const AlgorithmSolver = class {
         return res
     }
     loadDefaultBoard(){
-        return fs.readFileSync("./static/test_board.txt", "utf-8")
+        return fs.readFileSync("./static/test_board.txt", "utf-8").slice(0, -1)
     }
     getPointForWord(word, board){
         if (!this.checkWordinBoard(word, board) || !this.binarySearchForWord(word.toLowerCase(), 0, this.dictLength - 1) || word.length <= 2)
